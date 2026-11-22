@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LucidPosition — AI Research</title>
+<meta name="description" content="LucidPosition is an independent AI research organization building open language models.">
+<link rel="icon" type="image/png" href="resc/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --blue: #315FEA;
+    --blue-light: #8EACFF;
+    --black: #08090C;
+    --white: #fff;
+    --gray: #687080;
+    --border: #e5e5e5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: white;
+    color: var(--black);
+    font-family: Inter, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navigation */
+
+nav {
+    height: 57px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 max(calc((100% - 1160px) / 2), 5%);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(12px);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 19px;
+    font-weight: 750;
+    letter-spacing: -1px;
+}
+
+.brand-icon {
+    width: 29px;
+    height: 29px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 19px;
+    font-weight: 800;
+    overflow: hidden;
+}
+
+.brand-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: var(--blue);
+}
+
+.nav-cta {
+    color: white;
+    background: #090909;
+    padding: 7px 21px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.nav-cta:hover {
+    background: var(--blue);
+}
+
+/* HLE announcement */
+
+.hle-notice {
+    min-height: 48px;
+    padding: 12px 5%;
+    background: #f3f6ff;
+    border-bottom: 1px solid #e0e8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #303b57;
+    text-align: center;
+}
+
+.notice-tag {
+    color: var(--blue);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.hle-notice strong {
+    color: var(--blue);
+    font-weight: 800;
+}
+
+.hle-notice a {
+    color: var(--blue);
+    font-weight: 700;
+    transition: .2s;
+}
+
+.hle-notice a:hover {
+    text-decoration: underline;
+}
+
+/* Hero */
+
+.container {
+    max-width: 1160px;
+    margin: auto;
+}
+
+.hero {
+    padding-top: 100px;
+    padding-bottom: 65px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: start;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 5vw, 64px);
+    line-height: 1.17;
+    letter-spacing: -3.8px;
+    font-weight: 750;
+}
+
+.hero h1 .underline {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+    text-decoration-color: var(--blue);
+}
+
+.hero-description {
+    color: var(--gray);
+    font-size: 16px;
+    line-height: 1.7;
+    padding-top: 12px;
+    max-width: 510px;
+}
+
+/* Featured model */
+
+.featured {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 340px;
+    margin-top: 65px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--black);
+    color: white;
+    transition: transform .2s;
+}
+
+.featured:hover {
+    transform: translateY(-3px);
+}
+
+.feature-content {
+    padding: 65px 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.model-tag {
+    color: #8EAFFF;
+    font-size: 11px;
+    letter-spacing: 1.7px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+}
+
+.feature-content h2 {
+    font-size: 46px;
+    letter-spacing: -2.5px;
+    line-height: 1.1;
+    margin-bottom: 22px;
+}
+
+.feature-content p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #aab3c7;
+    max-width: 400px;
+}
+
+.read-more {
+    background: white;
+    color: #090909;
+    width: fit-content;
+    margin-top: 25px;
+    padding: 9px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.read-more:hover {
+    background: var(--blue-light);
+    color: white;
+}
+
+.read-more span {
+    margin-left: 12px;
+}
+
+/* Abstract model artwork */
+
+.artwork {
+    min-height: 340px;
+    overflow: hidden;
+}
+
+.model-image {
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Latest releases */
+
+.releases {
+    padding-top: 50px;
+    padding-bottom: 90px;
+}
+
+.releases-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.releases-heading h2 {
+    font-size: 22px;
+    letter-spacing: -.8px;
+}
+
+.view-all {
+    font-size: 13px;
+    color: var(--blue);
+    font-weight: 600;
+}
+
+.release {
+    border-top: 1px solid var(--border);
+    padding: 25px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    transition: .2s;
+}
+
+.release:hover h3 {
+    color: var(--blue);
+}
+
+.release-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.release-icon {
+    width: 48px;
+    height: 48px;
+    background: #edf2ff;
+    color: var(--blue);
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.release h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    transition: .2s;
+}
+
+.release p {
+    font-size: 12px;
+    color: var(--gray);
+}
+
+.release-date {
+    font-size: 12px;
+    color: var(--gray);
+}
+
+/* Footer */
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 30px 0;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-inner p {
+    font-size: 12px;
+    color: var(--gray);
+}
+
+@media(max-width: 1250px) {
+    .container {
+        margin-left: 7%;
+        margin-right: 7%;
+    }
+}
+
+@media(max-width: 700px) {
+    nav {
+        padding: 0 5%;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding-top: 65px;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+        letter-spacing: -2.8px;
+    }
+
+    .featured {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-content {
+        padding: 40px 30px;
+    }
+
+    .feature-content h2 {
+        font-size: 39px;
+    }
+
+    .artwork {
+        min-height: 260px;
+    }
+
+    .release-date {
+        display: none;
+    }
+
+    .container {
+        margin-left: 6%;
+        margin-right: 6%;
+    }
+
+    .hle-notice {
+        gap: 7px;
+        font-size: 11px;
+        padding: 12px 6%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="#" class="brand">
+        <div class="brand-icon">
+            <img src="resc/logo.png" class="brand-logo" alt="LucidPosition">
+        </div>
+        LUCIDPOSITION
+    </a>
+
+    <div class="nav-links">
+        <a href="#research">Research</a>
+        <a href="#safety">Safety</a>
+        <a href="#products">Products</a>
+        <a href="https://huggingface.co/LucidPosition">Models</a>
+    </div>
+
+    <a href="lcd.html" class="nav-cta">
+        Explore LCD 1.0
+    </a>
+</nav>
+
+<!-- HLE benchmark notification -->
+<div class="hle-notice">
+    <span class="notice-tag">BENCHMARK RESULT</span>
+    <span>LCD 1.0 achieved <strong>54.21%</strong> on Humanity's Last Exam (HLE).</span>
+    <a href="lcd.html">Explore LCD 1.0 →</a>
+</div>
+
+<main>
+
+<div class="container">
+
+    <section class="hero" id="research">
+        <div class="hero-grid">
+
+            <h1>
+                The AI lab for
+                <span class="underline">smarter models</span>
+                that write less.
+            </h1>
+
+            <p class="hero-description">
+                LucidPosition is an independent AI research
+                organization developing open language models.
+                Building intelligent systems with a focus on
+                precision, accessibility, and openness.
+            </p>
+
+        </div>
+
+        <a href="lcd.html" class="featured" id="products">
+
+            <div class="feature-content">
+                <div class="model-tag">Featured model · 2026</div>
+
+                <h2>LCD 1.0</h2>
+
+                <p>
+                    A 3-billion-parameter language model
+                    designed for precision, instruction following,
+                    and concise responses. Fully open weights.
+                </p>
+
+                <div class="read-more">
+                    Continue reading <span>→</span>
+                </div>
+            </div>
+
+            <div class="artwork">
+                <img src="resc/abstract.png" class="model-image" alt="Abstract LCD 1.0 artwork">
+            </div>
+
+        </a>
+    </section>
+
+    <section class="releases">
+        <div class="releases-heading">
+            <h2>Latest releases</h2>
+            <a class="view-all"
+               href="https://huggingface.co/LucidPosition">
+                View all →
+            </a>
+        </div>
+
+        <a href="lcd.html" class="release">
+
+            <div class="release-left">
+                <div class="release-icon">L</div>
+                <div>
+                    <h3>LCD 1.0</h3>
+                    <p>
+                        Language model · qwen2 · 3B parameters · GGUF
+                    </p>
+                </div>
+            </div>
+
+            <div class="release-date">2026 · Model release ↗</div>
+
+        </a>
+
+    </section>
+
+</div>
+
+</main>
+
+<footer id="safety">
+    <div class="container footer-inner">
+        <p><strong>LUCIDPOSITION</strong> · Open AI Research</p>
+        <p>Less verbosity. More intelligence.</p>
+        <p>© 2026 LucidPosition</p>
+    </div>
+</footer>
+
+</body>
+</html>

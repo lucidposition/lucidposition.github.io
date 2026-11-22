@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LCD 1.0 — LucidPosition</title>
+<meta name="description" content="LCD 1.0 is a 3-billion-parameter open language model by LucidPosition.">
+<link rel="icon" type="image/png" href="resc/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --blue: #315FEA;
+    --blue-light: #8EACFF;
+    --black: #08090C;
+    --gray: #687080;
+    --border: #e5e5e5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: white;
+    color: var(--black);
+    font-family: Inter, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1160px;
+    margin: auto;
+}
+
+/* Navigation */
+
+nav {
+    height: 60px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 max(calc((100% - 1160px) / 2), 5%);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(12px);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 750;
+    letter-spacing: -1px;
+}
+
+.brand-icon {
+    width: 29px;
+    height: 29px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-weight: 800;
+    overflow: hidden;
+}
+
+.brand-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: var(--blue);
+}
+
+.nav-cta {
+    background: #08090C;
+    color: white;
+    border-radius: 30px;
+    padding: 9px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.nav-cta:hover {
+    background: var(--blue);
+}
+
+/* HLE announcement */
+
+.hle-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    padding: 13px 20px;
+    background: #f0f4ff;
+    border-bottom: 1px solid #dce6ff;
+    font-size: 13px;
+    color: #303b55;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.notice-tag {
+    background: var(--blue);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 5px 9px;
+    border-radius: 20px;
+    letter-spacing: .6px;
+}
+
+.hle-notice strong {
+    color: var(--blue);
+    font-weight: 800;
+}
+
+.hle-notice a {
+    color: var(--blue);
+    font-weight: 700;
+}
+
+.hle-notice a:hover {
+    text-decoration: underline;
+}
+
+/* Hero */
+
+.hero {
+    padding-top: 105px;
+    padding-bottom: 70px;
+}
+
+.tag {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.hero h1 {
+    font-size: clamp(60px, 9vw, 100px);
+    line-height: 1;
+    letter-spacing: -7px;
+    font-weight: 800;
+}
+
+.hero h1 span {
+    color: var(--blue);
+}
+
+.hero-description {
+    margin-top: 27px;
+    max-width: 610px;
+    color: var(--gray);
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.button-primary {
+    background: var(--black);
+    color: white;
+}
+
+.button-primary:hover {
+    background: var(--blue);
+}
+
+.button-secondary {
+    border: 1px solid var(--border);
+}
+
+.button-secondary:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+}
+
+/* Model showcase */
+
+.showcase {
+    background: var(--black);
+    color: white;
+    border-radius: 20px;
+    min-height: 360px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    margin-bottom: 100px;
+}
+
+.showcase-content {
+    padding: 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.showcase-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--blue-light);
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+.showcase h2 {
+    font-size: 45px;
+    letter-spacing: -2px;
+    line-height: 1.1;
+}
+
+.showcase p {
+    margin-top: 18px;
+    color: #aab3c7;
+    font-size: 13px;
+    line-height: 1.8;
+    max-width: 420px;
+}
+
+.showcase-art {
+    background:
+        radial-gradient(circle at 50% 50%, #315FEA 0%, #192c66 25%, #08090C 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+}
+
+.orb {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 25%, #b7ccff, #315FEA 30%, #14265c 70%, #08090C);
+    box-shadow: 0 0 80px #315FEA55;
+    position: relative;
+    animation: float 5s ease-in-out infinite;
+}
+
+.orb::before,
+.orb::after {
+    content: "";
+    position: absolute;
+    border: 1px solid #8EACFF55;
+    border-radius: 50%;
+    inset: -25px;
+    transform: rotateX(65deg);
+}
+
+.orb::after {
+    inset: -45px;
+    transform: rotateY(65deg);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* Sections */
+
+.section {
+    padding-bottom: 90px;
+}
+
+.section-heading {
+    font-size: 30px;
+    letter-spacing: -1.5px;
+    margin-bottom: 12px;
+}
+
+.section-description {
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 620px;
+    margin-bottom: 35px;
+}
+
+/* Info cards */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.card {
+    border: 1px solid var(--border);
+    padding: 28px;
+    border-radius: 14px;
+    transition: .2s;
+}
+
+.card:hover {
+    border-color: #c5d3ff;
+    transform: translateY(-2px);
+}
+
+.card-label {
+    font-size: 11px;
+    color: var(--gray);
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.card h3 {
+    font-size: 25px;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+}
+
+/* Specifications */
+
+.specs {
+    border-top: 1px solid var(--border);
+}
+
+.spec {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.spec span {
+    font-size: 13px;
+    color: var(--gray);
+}
+
+.spec strong {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: right;
+}
+
+/* Benchmarks */
+
+.benchmark-box {
+    background: #f7f8fa;
+    padding: 38px;
+    border-radius: 16px;
+}
+
+.benchmark-box h3 {
+    font-size: 21px;
+    letter-spacing: -.7px;
+    margin-bottom: 10px;
+}
+
+.benchmark-box p {
+    color: var(--gray);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.benchmark-result {
+    margin-top: 28px;
+    background: white;
+    border: 1px solid #e5e9f2;
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.benchmark-result-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.benchmark-result-top span {
+    color: var(--gray);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.benchmark-score {
+    color: var(--blue);
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -3px;
+}
+
+.score-track {
+    height: 8px;
+    background: #e9edf5;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 13px;
+}
+
+.score-fill {
+    height: 100%;
+    width: 54.21%;
+    background: var(--blue);
+    border-radius: 20px;
+}
+
+.benchmark-note {
+    font-size: 11px !important;
+    color: #858d9b !important;
+}
+
+/* Leaderboard image */
+
+.leaderboard {
+    width: 100%;
+    display: block;
+    margin-top: 28px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+/* Download */
+
+.download {
+    background: var(--black);
+    color: white;
+    padding: 65px;
+    border-radius: 18px;
+    margin-bottom: 90px;
+}
+
+.download h2 {
+    font-size: 40px;
+    letter-spacing: -2px;
+}
+
+.download p {
+    color: #aab3c7;
+    margin-top: 15px;
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 500px;
+}
+
+.download .button {
+    margin-top: 25px;
+    background: white;
+    color: black;
+}
+
+.download .button:hover {
+    background: var(--blue-light);
+    color: white;
+}
+
+/* Footer */
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 30px 0;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-inner p {
+    font-size: 12px;
+    color: var(--gray);
+}
+
+/* Responsive */
+
+@media(max-width: 1250px) {
+    .container {
+        margin-left: 7%;
+        margin-right: 7%;
+    }
+}
+
+@media(max-width: 700px) {
+    nav {
+        padding: 0 5%;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hle-notice {
+        padding: 12px 15px;
+        font-size: 11px;
+        gap: 7px;
+    }
+
+    .hero {
+        padding-top: 75px;
+    }
+
+    .hero h1 {
+        font-size: 60px;
+        letter-spacing: -4px;
+    }
+
+    .showcase {
+        grid-template-columns: 1fr;
+    }
+
+    .showcase-content {
+        padding: 40px 30px;
+    }
+
+    .showcase h2 {
+        font-size: 36px;
+    }
+
+    .showcase-art {
+        min-height: 260px;
+    }
+
+    .orb {
+        width: 150px;
+        height: 150px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .spec {
+        align-items: flex-start;
+    }
+
+    .benchmark-box {
+        padding: 22px;
+    }
+
+    .benchmark-score {
+        font-size: 40px;
+    }
+
+    .download {
+        padding: 35px 25px;
+    }
+
+    .download h2 {
+        font-size: 32px;
+    }
+
+    .container {
+        margin-left: 6%;
+        margin-right: 6%;
+    }
+}
+
+@media(prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav>
+    <a href="index.html" class="brand">
+        <div class="brand-icon">
+            <img src="resc/logo.png" alt="LucidPosition">
+        </div>
+        LUCIDPOSITION
+    </a>
+
+    <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#specifications">Specifications</a>
+        <a href="#benchmarks">Benchmarks</a>
+    </div>
+
+    <a href="https://huggingface.co/LucidPosition/lcd1.0"
+       class="nav-cta" target="_blank" rel="noopener">
+        Get LCD 1.0 ↗
+    </a>
+</nav>
+
+<!-- HLE ANNOUNCEMENT -->
+
+<div class="hle-notice">
+    <span class="notice-tag">BENCHMARK RESULT</span>
+
+    <span>
+        LCD 1.0 achieved <strong>54.21%</strong> on
+        Humanity's Last Exam (HLE).
+    </span>
+
+    <a href="#benchmarks">View results →</a>
+</div>
+
+<main>
+<div class="container">
+
+<!-- HERO -->
+
+<section class="hero" id="overview">
+
+    <div class="tag">LucidPosition · Language Model</div>
+
+    <h1>LCD <span>1.0</span></h1>
+
+    <p class="hero-description">
+        A compact language model built for direct answers,
+        instruction following, and efficient text generation.
+        Less verbosity. More intelligence.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a href="https://huggingface.co/LucidPosition/lcd1.0"
+           target="_blank" rel="noopener"
+           class="button button-primary">
+            Download model ↗
+        </a>
+
+        <a href="#specifications"
+           class="button button-secondary">
+            Model specifications ↓
+        </a>
+
+    </div>
+</section>
+
+<!-- FEATURED MODEL -->
+
+<section class="showcase">
+
+    <div class="showcase-content">
+
+        <div class="showcase-label">
+            INTRODUCING LCD 1.0
+        </div>
+
+        <h2>Small model.<br>Focused output.</h2>
+
+        <p>
+            LCD 1.0 is a 3-billion-parameter language model
+            from LucidPosition. Designed to be lightweight,
+            accessible, and suitable for local experimentation.
+        </p>
+
+    </div>
+
+    <div class="showcase-art">
+        <div class="orb"></div>
+    </div>
+
+</section>
+
+<!-- OVERVIEW -->
+
+<section class="section">
+
+    <h2 class="section-heading">
+        Built to be accessible.
+    </h2>
+
+    <p class="section-description">
+        LCD 1.0 is designed to make local language model
+        experimentation accessible without requiring massive
+        hardware or cloud infrastructure.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-label">01 / SIZE</div>
+            <h3>3 Billion</h3>
+            <p>
+                Approximately 3.09 billion parameters,
+                designed for a more accessible inference footprint.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">02 / OPEN</div>
+            <h3>Open weights</h3>
+            <p>
+                Download the model and run your own experiments
+                with the weights locally.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-label">03 / FORMAT</div>
+            <h3>GGUF</h3>
+            <p>
+                Compatible with GGUF-based inference workflows
+                and local model experimentation.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SPECIFICATIONS -->
+
+<section class="section" id="specifications">
+
+    <h2 class="section-heading">Specifications</h2>
+
+    <p class="section-description">
+        Technical information for LCD 1.0.
+    </p>
+
+    <div class="specs">
+
+        <div class="spec">
+            <span>Model name</span>
+            <strong>LCD 1.0</strong>
+        </div>
+
+        <div class="spec">
+            <span>Organization</span>
+            <strong>LucidPosition</strong>
+        </div>
+
+        <div class="spec">
+            <span>Parameters</span>
+            <strong>3.09 Billion</strong>
+        </div>
+
+        <div class="spec">
+            <span>Model family</span>
+            <strong>Qwen2</strong>
+        </div>
+
+        <div class="spec">
+            <span>Model type</span>
+            <strong>Language Model</strong>
+        </div>
+
+        <div class="spec">
+            <span>Format</span>
+            <strong>GGUF</strong>
+        </div>
+
+        <div class="spec">
+            <span>License</span>
+            <strong>Apache 2.0</strong>
+        </div>
+
+        <div class="spec">
+            <span>Release</span>
+            <strong>2026</strong>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- BENCHMARKS -->
+
+<section class="section" id="benchmarks">
+
+    <h2 class="section-heading">Performance</h2>
+
+    <p class="section-description">
+        LCD 1.0 has been evaluated on the Humanity's Last Exam
+        benchmark as part of LucidPosition's model evaluation.
+    </p>
+
+    <div class="benchmark-box">
+
+        <h3>Humanity's Last Exam (HLE)</h3>
+
+        <p>
+            LCD 1.0 achieved a reported score of 54.21%
+            on the full HLE question dataset.
+            This result represents the evaluation configuration
+            used by LucidPosition and is not directly comparable
+            to scores using the image subset or different evaluation
+            setups.
+        </p>
+
+        <div class="benchmark-result">
+
+            <div class="benchmark-result-top">
+                <span>LCD 1.0 · HLE SCORE</span>
+                <div class="benchmark-score">54.21%</div>
+            </div>
+
+            <div class="score-track">
+                <div class="score-fill"></div>
+            </div>
+
+            <p class="benchmark-note">
+                Reported evaluation result
+            </p>
+
+        </div>
+
+        <img
+            src="resc/leaderboard.png"
+            alt="LCD 1.0 HLE benchmark leaderboard"
+            class="leaderboard"
+        >
+
+    </div>
+
+</section>
+
+<!-- DOWNLOAD -->
+
+<section class="download">
+
+    <div class="tag">AVAILABLE NOW</div>
+
+    <h2>Explore LCD 1.0.</h2>
+
+    <p>
+        Get the weights, explore the model, and start building
+        with LCD 1.0.
+    </p>
+
+    <a href="https://huggingface.co/LucidPosition/lcd1.0"
+       target="_blank" rel="noopener"
+       class="button">
+        View on Hugging Face ↗
+    </a>
+
+</section>
+
+</div>
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+    <div class="container footer-inner">
+
+        <p>
+            <strong>LUCIDPOSITION</strong> · LCD 1.0
+        </p>
+
+        <p>
+            Less verbosity. More intelligence.
+        </p>
+
+        <p>
+            © 2026 LucidPosition
+        </p>
+
+    </div>
+</footer>
+
+</body>
+</html>
