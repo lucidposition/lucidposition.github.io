@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LCD 1.0 — LucidPosition</title>
+<title>LucidPosition — LCD 1.0</title>
 <meta name="description" content="LCD 1.0 is a 3-billion-parameter open language model by LucidPosition.">
 <link rel="icon" type="image/png" href="resc/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -264,42 +264,21 @@ nav {
 }
 
 .showcase-art {
-    background:
-        radial-gradient(circle at 50% 50%, #315FEA 0%, #192c66 25%, #08090C 70%);
+    background: #08090C;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 360px;
+    overflow: hidden;
 }
 
-.orb {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 25%, #b7ccff, #315FEA 30%, #14265c 70%, #08090C);
-    box-shadow: 0 0 80px #315FEA55;
-    position: relative;
-    animation: float 5s ease-in-out infinite;
-}
-
-.orb::before,
-.orb::after {
-    content: "";
-    position: absolute;
-    border: 1px solid #8EACFF55;
-    border-radius: 50%;
-    inset: -25px;
-    transform: rotateX(65deg);
-}
-
-.orb::after {
-    inset: -45px;
-    transform: rotateY(65deg);
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+.showcase-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 360px;
+    max-height: 460px;
+    object-fit: contain;
 }
 
 /* Sections */
@@ -569,10 +548,11 @@ footer {
         min-height: 260px;
     }
 
-    .orb {
-        width: 150px;
-        height: 150px;
+    .showcase-image {
+        min-height: 260px;
+        max-height: 320px;
     }
+
 
     .cards {
         grid-template-columns: 1fr;
@@ -704,7 +684,7 @@ footer {
     </div>
 
     <div class="showcase-art">
-        <div class="orb"></div>
+        <img src="resc/landscape.png" alt="LCD 1.0" class="showcase-image">
     </div>
 
 </section>
